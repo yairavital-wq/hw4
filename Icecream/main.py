@@ -77,7 +77,20 @@ class IceCreamWindow(QWidget):
 
         self.file_label.setText(Path(filename).name)
 
-        #my code here
+        
+    self.temperatures = []
+    self.revenues = []
+
+    with open(filename, "r", encoding="utf-8-sig") as file:
+        reader = csv.reader(file)
+        next(reader)
+
+        for row in reader:
+            self.temperatures.append(float(row[0]))
+            self.revenues.append(float(row[1]))
+
+    self.draw_graph()
+
 
     def draw_graph(self):
         self.ax.clear()
