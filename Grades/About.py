@@ -21,7 +21,7 @@ class AboutWindow(QWidget):
         email.setGeometry(30, 110, 360, 30)
 
         github = QLabel(
-            '<a href="https://github.com/YOUR_USERNAME/HW4-Grades">GitHub repository</a>',
+            '<a href="https://github.com/yairavital-wq/hw4">GitHub repository</a>',
             self
         )
         github.setGeometry(30, 150, 360, 30)
