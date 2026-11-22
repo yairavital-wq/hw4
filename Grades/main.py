@@ -1,5 +1,6 @@
 
 import sys
+import csv
 from pathlib import Path
 
 from PySide6.QtCore import QUrl
@@ -128,9 +129,16 @@ self.update_table()
     def update_grades(self):
         bonus = self.bonus_input.value()
 
-        # YOUR CODE:
-        # Calculate corrected grades
-        # Maximum grade is 100
+        for i in range(len(self.original_grades)):
+            new_grade = self.original_grades[i] + bonus
+
+            if new_grade > 100:
+                new_grade = 100
+
+    self.corrected_grades[i] = new_grade
+
+self.update_table()
+
 
         self.status_label.setText(f"Bonus entered: {bonus}")
 
@@ -141,12 +149,28 @@ self.update_table()
             )
             return
 
-        # YOUR CODE:
-        # Save corrected grades to original CSV file
+        with open(self.selected_file, "w",
+                  newline="", encoding="utf-8") as file:
 
-        # QDesktopServices.openUrl(
-        #     QUrl.fromLocalFile(self.selected_file)
-        # )
+            writer = csv.writer(file)
+            writer.writerow(self.file_header)
+
+            for i in range(len(self.student_ids)):
+                writer.writerow([
+                    self.student_ids[i],
+                    self.corrected_grades[i]
+                ])
+
+        self.status_label.setText("File updated successfully.")
+
+        QMessageBox.information(
+            self, "Success", "Grades file updated successfully!"
+        )
+
+        QDesktopServices.openUrl(
+            QUrl.fromLocalFile(self.selected_file)
+        )
+
 
         self.status_label.setText("Complete CSV saving code.")
 
