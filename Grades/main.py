@@ -112,45 +112,45 @@ self.update_table()
 
         self.status_label.setText("File selected.")
 
-    def update_table(self):
-        self.table.clearContents()
+        def update_table(self):
+            self.table.clearContents()
 
-        for i in range(min(len(self.student_ids), 50)):
-            self.table.setItem(
-                i, 0, QTableWidgetItem(str(self.student_ids[i]))
-            )
-            self.table.setItem(
-                i, 1, QTableWidgetItem(str(self.original_grades[i]))
-            )
-            self.table.setItem(
-                i, 2, QTableWidgetItem(str(self.corrected_grades[i]))
-            )
+            for i in range(min(len(self.student_ids), 50)):
+                self.table.setItem(
+                    i, 0, QTableWidgetItem(str(self.student_ids[i]))
+                )
+                self.table.setItem(
+                    i, 1, QTableWidgetItem(str(self.original_grades[i]))
+                )
+                self.table.setItem(
+                    i, 2, QTableWidgetItem(str(self.corrected_grades[i]))
+                )
 
-    def update_grades(self):
-        bonus = self.bonus_input.value()
+        def update_grades(self):
+            bonus = self.bonus_input.value()
 
-        for i in range(len(self.original_grades)):
-            new_grade = self.original_grades[i] + bonus
+            for i in range(len(self.original_grades)):
+                new_grade = self.original_grades[i] + bonus
 
-            if new_grade > 100:
-                new_grade = 100
+                if new_grade > 100:
+                    new_grade = 100
 
-    self.corrected_grades[i] = new_grade
+        self.corrected_grades[i] = new_grade
 
-self.update_table()
+    self.update_table()
 
 
-        self.status_label.setText(f"Bonus entered: {bonus}")
+self.status_label.setText(f"Bonus entered: {bonus}")
 
     def save_file(self):
         if self.selected_file == "":
             QMessageBox.warning(
-                self, "Error", "Choose a CSV file first."
+                 self, "Error", "Choose a CSV file first."
             )
             return
 
-        with open(self.selected_file, "w",
-                  newline="", encoding="utf-8") as file:
+         with open(self.selected_file, "w",
+                newline="", encoding="utf-8") as file:
 
             writer = csv.writer(file)
             writer.writerow(self.file_header)
