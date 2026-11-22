@@ -105,7 +105,13 @@ class IceCreamWindow(QWidget):
             return
 
        
-        #code here
+            self.ax.scatter(
+        self.temperatures,
+        self.revenues,
+        s=1,
+        color="blue",
+        label="Data"
+    )
 
        
         coefficients = np.polyfit(
@@ -136,7 +142,14 @@ class IceCreamWindow(QWidget):
             color="red"
         )
 
-        #code here
+        self.ax.spines["top"].set_visible(False)
+        self.ax.spines["right"].set_visible(False)
+
+        self.ax.set_xlabel("Temperature")
+        self.ax.set_ylabel("Revenue")
+        self.ax.set_title("Ice Cream Revenue vs Temperature")
+
+        self.ax.legend()
 
         self.fig.tight_layout()
         self.canvas.draw()
