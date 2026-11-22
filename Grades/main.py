@@ -98,8 +98,16 @@ class GradesWindow(QWidget):
         self.selected_file = filename
         self.file_label.setText(Path(filename).name)
 
-        # YOUR CODE:
-        # Read CSV file and fill the three lists
+       self.student_ids = []
+self.original_grades = []
+self.corrected_grades = []
+
+with open(self.selected_file, "r", newline="", encoding="utf-8-sig") as file:
+    reader = csv.reader(file)
+    next(reader)
+
+
+self.update_table()
 
         self.status_label.setText("File selected.")
 
